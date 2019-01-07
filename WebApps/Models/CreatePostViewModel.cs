@@ -8,9 +8,9 @@ namespace WebApps.Models
 {
     public class CreatePostViewModel
     {
-        [Required, MaxLength(20)]
+        [Required, StringLength(500, MinimumLength = 1)]
         public string Title { get; set; }
-        [Required, MaxLength(500), Display(Name = "Your Post")]
+        [Required, StringLength(500, MinimumLength = 1), Display(Name = "Your Post")]
         public string PostText { get; set; }
     }
 }

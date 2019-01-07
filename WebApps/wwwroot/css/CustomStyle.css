@@ -1,3 +1,36 @@
 ﻿body {
-    background-color: lightgray;
+    background-color: #d3d3d3;
+}
+
+.PostContent {
+    border-style: dashed;
+    border-color: #eaeaea;
+    border-width: 2px;
+    background-color: #e0e0e0;
+}
+
+.customButton {
+    display: inline-block;
+    border: 1px solid #999;
+    color: #000000;
+    border-radius: 20px 20px 20px 20px;
+    font-family: Verdana;
+    width: auto;
+    height: auto;
+    font-size: 12px;
+    padding: 6px 30px;
+    background-color: #fafafa;
+    margin-bottom: 5px;
+}
+
+.customButton:hover, .btn-class:active {
+    border: 1px solid #000000;
+    background-color: #707070;
+    color: #FFFFFF;
+}
+
+.commentBox {
+    background-color: #fafafa;
+    width: 50%;
+    height: 60px;
 }
