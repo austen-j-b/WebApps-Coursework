@@ -80,9 +80,10 @@ namespace WebApps.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Details([Bind("PostId,CommentText")] FullPostViewModel vm)
+        public async Task<IActionResult> Details([Bind("PostID,Comment")] FullPostViewModel vm)
         {
 
+            FullPostViewModel viewModel = null;
             if (ModelState.IsValid)
             {
                 Comment newComment = new Comment();
@@ -93,7 +94,7 @@ namespace WebApps.Controllers
                 newComment.OwnerId = Owner.Id;
 
                 Post post = await _context.Posts
-                    .FirstOrDefaultAsync(m => m.PostId == vm.Post.PostId);
+                    .FirstOrDefaultAsync(m => m.PostId == vm.PostID);
                 if (post == null)
                 {
                     return NotFound();
@@ -104,10 +105,14 @@ namespace WebApps.Controllers
                 _context.Add(newComment);
                 await _context.SaveChangesAsync();
 
-                FullPostViewModel viewModel = await GetFullPostVMFromPost(post);
+                viewModel = await GetFullPostVMFromPost(post);
+            }
+            else
+            {
+                return RedirectToAction(nameof(Index));
             }
 
-            return View(vm);
+            return View(viewModel);
         }
 
         public IActionResult Create()

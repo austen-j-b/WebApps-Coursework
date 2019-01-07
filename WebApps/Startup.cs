@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using WebApps.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Security.Claims;
 
 namespace WebApps
 {
@@ -44,7 +45,7 @@ namespace WebApps
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -69,6 +70,8 @@ namespace WebApps
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+            SeedData.CreateRoles(serviceProvider).Wait();
+            //CreateRoles(serviceProvider).Wait();
         }
     }
 }

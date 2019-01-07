@@ -49,7 +49,7 @@
 <div>
     <form asp-action="Details">
         <div asp-validation-summary="All"></div>
-        <input type="hidden" asp-for="PostID" value="@Model.PostID" />
+        <input type="hidden" asp-for="PostID" value="@Model.Post.PostId" />
         <div>
             <label asp-for="Comment"></label>
             <input asp-for="Comment" />
