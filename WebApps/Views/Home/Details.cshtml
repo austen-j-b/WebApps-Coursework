@@ -57,9 +57,41 @@
 <div>
     @foreach (Comment comment in Model.Comments)
     {
-        <div>@Html.DisplayFor(modelItem => comment.CommentText)</div>
+        <div>
+            <ul>
+                <li>
+                    <p>@Html.DisplayFor(modelItem => comment.CommentText)</p>
+                    <p>
+                        &nbsp; &nbsp; @Html.DisplayFor(modelItem => comment.OwnerUserName) &nbsp; &nbsp;
+                        @Html.DisplayFor(modelItem => comment.DatePosted)
+                    </p>
+                    <div>
+                        <a asp-controller="Home" asp-action="Like" asp-route-CommentId="@comment.CommentId" 
+                        asp-route-PostID="@Model.Post.PostId">Likes</a> @Html.DisplayFor(modelItem => comment.NoOfLikes)
+                    </div>
+                    <hr />
+                </li>
+            </ul>
+        </div>
     }
 </div>
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+
+
+<script>
+    $("#myLink").click(function (e) {
+
+        e.preventDefault();
+        $.ajax({
+
+            url: $(this).attr("href"), // comma here instead of semicolon   
+            success: function () {
+                alert("Value Added");  // or any other indication if you want to show
+            }
+
+        });
+
+    });
+</script>

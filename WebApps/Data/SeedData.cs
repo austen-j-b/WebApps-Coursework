@@ -19,7 +19,6 @@ namespace WebApps.Data
                 var userManager = serviceProvider.GetService<UserManager<IdentityUser>>();
                 var roleManager = serviceProvider.GetService<RoleManager<IdentityRole>>();
 
-                IdentityResult roleResult;
                 string testUserPW = "Password123!";
 
                 var member1 = await EnsureUser(userManager, testUserPW, "Member1@email.com");

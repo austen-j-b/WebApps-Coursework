@@ -92,6 +92,7 @@ namespace WebApps.Controllers
                 newComment.CommentText = vm.Comment;
                 newComment.DatePosted = DateTime.Now;
                 newComment.OwnerId = Owner.Id;
+                newComment.OwnerUserName = Owner.UserName; 
 
                 Post post = await _context.Posts
                     .FirstOrDefaultAsync(m => m.PostId == vm.PostID);
@@ -113,6 +114,23 @@ namespace WebApps.Controllers
             }
 
             return View(viewModel);
+        }
+
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Like(LikeModel like)
+        {
+            Like newLike = new Like();
+            var Liker = await _userManager.FindByNameAsync(LoggedInUsername);
+            newLike.LikerId = Liker.Id;
+
+            Like existingLike = await _context.Likes
+                .FirstOrDefaultAsync(m => m.LikerId == newLike.LikerId && m.CommentId == like.CommentId);
+            if(existingLike == null)
+            {
+                _context.Add(newLike);
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction("Details", new { id = 2});
         }
 
         [Authorize(Policy = "IsAdminAccess")]

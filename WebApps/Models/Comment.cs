@@ -19,7 +19,12 @@ namespace WebApps.Models
         public string OwnerId { get; set; }
 
         [Required]
+        public string OwnerUserName { get; set; }
+
+        [Required]
         public DateTime DatePosted { get; set; }
+
+        public int NoOfLikes { get; set; }
 
         [Required]
         public virtual Post ParentPost { get; set; }
