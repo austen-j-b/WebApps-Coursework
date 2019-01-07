@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TestingUsers.Models.Post>
+﻿@model IEnumerable<WebApps.Models.Post>
 
 @{
     ViewData["Title"] = "Index";
@@ -16,7 +16,7 @@
                 @Html.DisplayNameFor(model => model.PostText)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.OwnerId)
+                @Html.DisplayNameFor(model => model.OwnerUsername)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.DatePosted)
@@ -35,7 +35,7 @@
                     @Html.DisplayFor(modelItem => item.PostText)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.OwnerId)
+                    @Html.DisplayFor(modelItem => item.OwnerUsername)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.DatePosted)

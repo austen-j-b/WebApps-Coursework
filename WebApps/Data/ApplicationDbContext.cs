@@ -14,7 +14,7 @@ namespace WebApps.Data
         {
         }
 
-        public DbSet<TestingUsers.Models.Post> Posts { get; set; }
-        public DbSet<TestingUsers.Models.Comment> Comments { get; set; }
+        public DbSet<WebApps.Models.Post> Posts { get; set; }
+        public DbSet<WebApps.Models.Comment> Comments { get; set; }
     }
 }

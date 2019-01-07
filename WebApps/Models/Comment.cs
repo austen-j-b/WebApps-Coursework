@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TestingUsers.Models
+namespace WebApps.Models
 {
     public class Comment
     {

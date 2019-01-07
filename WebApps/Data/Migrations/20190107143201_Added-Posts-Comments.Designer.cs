@@ -186,7 +186,7 @@ namespace WebApps.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("TestingUsers.Models.Comment", b =>
+            modelBuilder.Entity("WebApps.Models.Comment", b =>
                 {
                     b.Property<int>("CommentId")
                         .ValueGeneratedOnAdd()
@@ -210,7 +210,7 @@ namespace WebApps.Data.Migrations
                     b.ToTable("Comments");
                 });
 
-            modelBuilder.Entity("TestingUsers.Models.Post", b =>
+            modelBuilder.Entity("WebApps.Models.Post", b =>
                 {
                     b.Property<int>("PostId")
                         .ValueGeneratedOnAdd()
@@ -281,9 +281,9 @@ namespace WebApps.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("TestingUsers.Models.Comment", b =>
+            modelBuilder.Entity("WebApps.Models.Comment", b =>
                 {
-                    b.HasOne("TestingUsers.Models.Post", "ParentPost")
+                    b.HasOne("WebApps.Models.Post", "ParentPost")
                         .WithMany()
                         .HasForeignKey("ParentPostPostId")
                         .OnDelete(DeleteBehavior.Cascade);

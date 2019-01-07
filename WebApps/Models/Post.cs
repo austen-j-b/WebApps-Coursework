@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TestingUsers.Models
+namespace WebApps.Models
 {
     public class Post
     {
@@ -21,6 +21,9 @@ namespace TestingUsers.Models
 
         [Required]
         public string OwnerId { get; set; }
+
+        [Required]
+        public string OwnerUsername { get; set; }
 
         [Required]
         public DateTime DatePosted { get; set; }

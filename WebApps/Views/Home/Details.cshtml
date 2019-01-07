@@ -1,0 +1,71 @@
+﻿@model WebApps.Models.FullPostViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+
+<div>
+    <h4>Post</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Post.Title)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Post.Title)
+        </dd>
+        <dt>
+            Author
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OwnerUserName)
+        </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Post.PostText)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Post.PostId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Post.PostId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Post.NoOfComments)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Post.NoOfComments)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Post.DatePosted)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Post.DatePosted)
+        </dd>
+    </dl>
+</div>
+<div>
+    <form asp-action="Details">
+        <div asp-validation-summary="All"></div>
+        <input type="hidden" asp-for="PostID" value="@Model.PostID" />
+        <div>
+            <label asp-for="Comment"></label>
+            <input asp-for="Comment" />
+            <span asp-validation-for="Comment"></span>
+        </div>
+        <div>
+            <input type="submit" value="Comment" />
+        </div>
+    </form>
+</div>
+<div>
+    @foreach (Comment comment in Model.Comments)
+    {
+        <div>@Html.DisplayFor(modelItem => comment.CommentText)</div>
+    }
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
