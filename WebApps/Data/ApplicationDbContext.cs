@@ -4,6 +4,7 @@ using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace WebApps.Data
 {
     public class ApplicationDbContext : IdentityDbContext
@@ -12,5 +13,8 @@ namespace WebApps.Data
             : base(options)
         {
         }
+
+        public DbSet<TestingUsers.Models.Post> Posts { get; set; }
+        public DbSet<TestingUsers.Models.Comment> Comments { get; set; }
     }
 }

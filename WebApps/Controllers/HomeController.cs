@@ -3,16 +3,47 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using TestingUsers.Models;
+using WebApps.Data;
 using WebApps.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebApps.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly ApplicationDbContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
+
+        private string LoggedInUsername => User.Identity.Name;
+
+        public HomeController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
-            return View();
+
+            _context = context;
+            _userManager = userManager;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            return View(await _context.Posts.ToListAsync());
+        }
+
+        public async Task<Boolean> IsPostOwner(Post post)
+        {
+            var postOwner = await _userManager.FindByIdAsync(post.OwnerId);
+            // currentUser will error if not logged in, this is fine as you will have to be logged in to do this action.
+            var currentUser = await _userManager.FindByNameAsync(LoggedInUsername);
+
+            if (postOwner != currentUser)
+            {
+                return false; // CREATE A PROPER "NOT OWNER OF POST" 
+            }
+            return true;
         }
 
         public IActionResult About()
