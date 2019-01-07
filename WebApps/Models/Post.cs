@@ -17,17 +17,22 @@ namespace WebApps.Models
 
         [Required]
         [StringLength(500, MinimumLength = 1)]
+        [Display(Name = "Post")]
         public string PostText { get; set; }
 
         [Required]
+        [Display(Name = "Author ID")]
         public string OwnerId { get; set; }
 
         [Required]
+        [Display(Name = "Author")]
         public string OwnerUsername { get; set; }
 
         [Required]
+        [Display(Name = "Date")]
         public DateTime DatePosted { get; set; }
 
+        [Display(Name = "Comments")]
         public int NoOfComments { get; set; }
     }
 }

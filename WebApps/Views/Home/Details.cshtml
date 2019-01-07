@@ -18,19 +18,13 @@
             @Html.DisplayFor(model => model.Post.Title)
         </dd>
         <dt>
-            Author
+            @Html.DisplayNameFor(model => model.OwnerUserName)
         </dt>
         <dd>
             @Html.DisplayFor(model => model.OwnerUserName)
         </dd>
         <dd>
             @Html.DisplayFor(model => model.Post.PostText)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Post.PostId)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Post.PostId)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Post.NoOfComments)

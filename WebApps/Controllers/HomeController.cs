@@ -42,7 +42,7 @@ namespace WebApps.Controllers
             {
                 return false; // CREATE A PROPER "NOT OWNER OF POST" 
             }
-            return true;
+            return true; 
         }
 
         private async Task<FullPostViewModel> GetFullPostVMFromPost(Post post)
@@ -55,7 +55,7 @@ namespace WebApps.Controllers
 
             viewModel.Comments = comments;
 
-            string OwnerUsername = post.OwnerUsername;
+            viewModel.OwnerUserName = post.OwnerUsername;
             return viewModel;
         }
 
@@ -101,7 +101,7 @@ namespace WebApps.Controllers
                 }
 
                 newComment.ParentPost = post;
-
+                post.NoOfComments++;
                 _context.Add(newComment);
                 await _context.SaveChangesAsync();
 
@@ -115,12 +115,15 @@ namespace WebApps.Controllers
             return View(viewModel);
         }
 
+        [Authorize(Policy = "IsAdminAccess")]
         public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Policy = "IsAdminAccess")]
         public async Task<IActionResult> Create([Bind("Title,PostText")] CreatePostViewModel vm)
         {
             Post post = new Post();

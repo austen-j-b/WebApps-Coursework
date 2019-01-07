@@ -13,7 +13,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.PostText)
+                @Html.DisplayNameFor(model => model.Title)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.OwnerUsername)
@@ -32,7 +32,7 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.PostText)
+                    <a asp-action="Details" asp-route-id="@item.PostId">@Html.DisplayFor(modelItem => item.Title)</a>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.OwnerUsername)
@@ -44,8 +44,7 @@
                     @Html.DisplayFor(modelItem => item.NoOfComments)
                 </td>
                 <td>
-                    <a asp-action="Details" asp-route-id="@item.PostId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.PostId">Delete</a>
+                    <a asp-action="Details" asp-route-id="@item.PostId">Details</a>
                 </td>
             </tr>
         }
