@@ -116,21 +116,35 @@ namespace WebApps.Controllers
             return View(viewModel);
         }
 
+        [ActionName("Like")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Like(LikeModel like)
+        public async Task<IActionResult> Details(int commentId, int postId)
         {
+            Comment comment = await _context.Comments
+                    .FirstOrDefaultAsync(m => m.CommentId == commentId);
+
             Like newLike = new Like();
             var Liker = await _userManager.FindByNameAsync(LoggedInUsername);
             newLike.LikerId = Liker.Id;
 
             Like existingLike = await _context.Likes
-                .FirstOrDefaultAsync(m => m.LikerId == newLike.LikerId && m.CommentId == like.CommentId);
+                .FirstOrDefaultAsync(m => (m.LikerId == newLike.LikerId && m.CommentId == commentId));
+            newLike.CommentId = commentId;
             if(existingLike == null)
             {
+                comment.NoOfLikes++;
                 _context.Add(newLike);
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
+                //await _context.SaveChangesAsync();
+            } if(existingLike != null)
+            {
+                comment.NoOfLikes--;
+                _context.Entry(existingLike).State = EntityState.Deleted;
+                _context.Remove(existingLike);
+                _context.SaveChanges();
+                //await _context.SaveChangesAsync();
             }
-            return RedirectToAction("Details", new { id = 2});
+            return RedirectToAction("Details", new { id = postId });
         }
 
         [Authorize(Policy = "IsAdminAccess")]

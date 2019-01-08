@@ -38,7 +38,7 @@
         <div>
             <textarea asp-for="Comment" placeholder="Comment on this post..." class="commentBox"></textarea>
             <span asp-validation-for="Comment"></span>
-            <input type="submit" value="Comment" class="customButton"/>
+            <input type="submit" value="Comment" class="customButton" />
         </div>
     </form>
 </div>
@@ -56,7 +56,13 @@
                            asp-route-PostID="@Model.Post.PostId">Likes</a> @Html.DisplayFor(modelItem => comment.NoOfLikes)
                     </p>
                     <div>
-                        
+                        <form asp-action="Like">
+                            <input type="hidden" id="commentId" name="commentId"  value="@comment.CommentId" />
+                            <input type="hidden" id="postId" name="postId" value="@Model.Post.PostId" />
+                            <div>
+                                <input type="submit" value="LIKE" />
+                            </div>
+                        </form>
                     </div>
                     <hr />
                 </li>
@@ -68,19 +74,12 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
+<script language="C#" runat="server">
 
-<script>
-    $("#myLink").click(function (e) {
 
-        e.preventDefault();
-        $.ajax({
+    public void Like(object sender, EventArgs e){
+        
+    }
 
-            url: $(this).attr("href"), // comma here instead of semicolon   
-            success: function () {
-                alert("Value Added");  // or any other indication if you want to show
-            }
 
-        });
-
-    });
 </script>

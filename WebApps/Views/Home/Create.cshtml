@@ -9,17 +9,16 @@
     <div asp-validation-summary="All"></div>
 
     <div>
-        <label asp-for="Title"></label>
-        <input asp-for="Title" />
+        <input asp-for="Title" placeholder="Title..."/>
         <span asp-validation-for="Title"></span>
     </div>
+    <br />
     <div>
-        <label asp-for="PostText"></label>
-        <input asp-for="PostText" />
+        <textarea asp-for="PostText" placeholder="Post Contents..." class="commentBox"></textarea>
         <span asp-validation-for="PostText"></span>
     </div>
     <div>
-        <input type="submit" value="Create" />
+        <input type="submit" value="Create" class="customButton" />
     </div>
 </form>
 
